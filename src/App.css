@@ -1,0 +1,13 @@
+:root {
+  background-color: #000;
+  --color-text: #fff;
+}
+
+.App {
+  position: relative;
+  min-height: 100vh;
+}
+
+text {
+  color: var(--color-text);
+}
