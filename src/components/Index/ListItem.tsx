@@ -11,8 +11,8 @@ import image_10 from "../../assets/waterfall/10.jpeg";
 import { useRef, useState, useMemo } from "@lynx-js/react";
 import { randomInt1to10 } from "../../utils.jsx";
 
-export const ItemView = (props: { index: number; navIndex: number }) => {
-  const { index, navIndex } = props;
+export const ItemView = (props: { index: number; navIndex: number; searchKeyword?: string }) => {
+  const { index, navIndex, searchKeyword } = props;
   const imageRef = useRef(null);
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   const [imageHeight, setImageHeight] = useState<number>(0);
@@ -54,7 +54,7 @@ export const ItemView = (props: { index: number; navIndex: number }) => {
         src={imageUrl}
       />
       <text className="list-item-text">
-        {`${currentNavName}-item-${index}`}
+        {searchKeyword ? `${searchKeyword}-item-${index}` : `${currentNavName}-item-${index}`}
       </text>
     </view>
   );

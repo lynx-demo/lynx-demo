@@ -6,9 +6,10 @@ import type { TouchEvent } from "@lynx-js/types";
 interface HeaderProps {
   navIndex: number;
   setNavIndex: (index: number) => void;
+  onOpenSearch?: () => void;
 }
 
-export const Header = ({ navIndex, setNavIndex }: HeaderProps) => {
+export const Header = ({ navIndex, setNavIndex, onOpenSearch }: HeaderProps) => {
   interface navListRef {
     title: String;
     badge?: Number
@@ -41,7 +42,7 @@ export const Header = ({ navIndex, setNavIndex }: HeaderProps) => {
           </view>
         ))}
       </view>
-      <view className="header__search-wrapper">
+      <view className="header__search-wrapper" bindtap={onOpenSearch}>
         <image src={search} className="header__search" />
       </view>
     </view>
