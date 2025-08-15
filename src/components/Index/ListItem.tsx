@@ -11,8 +11,15 @@ import image_10 from "../../assets/waterfall/10.jpeg";
 import { useRef, useState, useMemo } from "@lynx-js/react";
 import { randomInt1to10 } from "../../utils.jsx";
 
-export const ItemView = (props: { index: number; navIndex: number; searchKeyword?: string }) => {
-  const { index, navIndex, searchKeyword } = props;
+interface ItemViewProps {
+  index: number;
+  navIndex: number;
+  searchKeyword?: string;
+  onItemClick?: (itemData: any) => void;
+}
+
+export const ItemView = (props: ItemViewProps) => {
+  const { index, navIndex, searchKeyword, onItemClick } = props;
   const imageRef = useRef(null);
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   const [imageHeight, setImageHeight] = useState<number>(0);
@@ -25,7 +32,7 @@ export const ItemView = (props: { index: number; navIndex: number; searchKeyword
   
   // 使用 useMemo 确保随机索引只在组件首次渲染时计算一次
   const imageUrl = useMemo(() => {
-    const randomIndex = randomInt1to10() - 1;
+    const randomIndex = randomInt1to10();
     return imageList[randomIndex];
   }, []);
 
@@ -39,11 +46,25 @@ export const ItemView = (props: { index: number; navIndex: number; searchKeyword
     setImageHeight(value);
   };
 
+  const handleItemClick = () => {
+    if (onItemClick) {
+      const itemData = {
+        index,
+        navIndex,
+        imageUrl,
+        imageList,
+        title: searchKeyword ? `${searchKeyword}-item-${index}` : `${currentNavName}-item-${index}`
+      };
+      onItemClick(itemData);
+    }
+  };
+
   return (
     <view
       className="list-item-view"
       ref={imageRef}
       clip-radius={true}
+      bindtap={handleItemClick}
     >
       <image
         className="list-item-image"

@@ -5,9 +5,10 @@ import { ItemView } from "./ListItem.jsx";
 interface ListProps {
   navIndex: number;
   searchKeyword?: string;
+  onItemClick?: (itemData: any) => void;
 }
 
-export const List = ({ navIndex, searchKeyword }: ListProps) => {
+export const List = ({ navIndex, searchKeyword, onItemClick }: ListProps) => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -82,7 +83,7 @@ export const List = ({ navIndex, searchKeyword }: ListProps) => {
             item-key={`list-item-${index}`}
             key={`list-item-${index}`}
           >
-            <ItemView index={index} navIndex={navIndex} searchKeyword={searchKeyword} />
+            <ItemView index={index} navIndex={navIndex} searchKeyword={searchKeyword} onItemClick={onItemClick} />
           </list-item>
         );
       })}
