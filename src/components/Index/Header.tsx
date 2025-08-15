@@ -7,9 +7,10 @@ interface HeaderProps {
   navIndex: number;
   setNavIndex: (index: number) => void;
   onOpenSearch?: () => void;
+  onOpenSidebar?: () => void;
 }
 
-export const Header = ({ navIndex, setNavIndex, onOpenSearch }: HeaderProps) => {
+export const Header = ({ navIndex, setNavIndex, onOpenSearch, onOpenSidebar }: HeaderProps) => {
   interface navListRef {
     title: String;
     badge?: Number
@@ -29,7 +30,7 @@ export const Header = ({ navIndex, setNavIndex, onOpenSearch }: HeaderProps) => 
   }
   return (
     <view className="header">
-      <view className="header__menu-wrapper">
+      <view className="header__menu-wrapper" bindtap={onOpenSidebar}>
         <image src={menu} className="header__menu" />
       </view>
       <view className="header__nav">
